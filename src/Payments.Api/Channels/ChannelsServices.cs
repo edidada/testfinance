@@ -26,8 +26,10 @@ public static class ChannelRouter
         if (preferredChannel is not null && Enum.TryParse<ChannelType>(preferredChannel, true, out var preferred))
             return _channels.First(c => c.Type == preferred);
 
-        // 成本 = 金额 × 费率；得分 = 成功率 × 100 - 优先级 - 成本
+        // 自动路由仅在真实外部渠道中选择（排除 Internal 内部通道，仅显式指定时可用）
+        // 成本 = 金额 × 费率；得分 = 成本 - 成功率 × 100 + 优先级（得分越低越优）
         return _channels
+            .Where(c => c.Type != ChannelType.Internal)
             .OrderBy(c => amount * c.FeeRate - c.SuccessRate * 100 + c.Priority)
             .First();
     }

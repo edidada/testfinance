@@ -90,11 +90,11 @@ public sealed class PaymentFeatureTests
 
     // ===== CNAPS 通道选择 =====
     [Theory]
-    [InlineData(50_000m, false, CnapsChannel.HVPS)]      // 5 万以上走大额
-    [InlineData(3_000m, false, CnapsChannel.BEPS)]        // 2000-5 万走小额
-    [InlineData(1_000m, false, CnapsChannel.SUPER_NET)]   // 2000 以下走网银互联
-    [InlineData(1_000m, true, CnapsChannel.HVPS)]         // 紧急走大额
-    public void Cnaps_selects_channel_by_amount_and_urgency(decimal amount, bool urgent, CnapsChannel expected)
+    [InlineData(50000, false, CnapsChannel.HVPS)]        // 5 万以上走大额
+    [InlineData(3000, false, CnapsChannel.BEPS)]         // 2000-5 万走小额
+    [InlineData(1000, false, CnapsChannel.SUPER_NET)]    // 2000 以下走网银互联
+    [InlineData(1000, true, CnapsChannel.HVPS)]          // 紧急走大额
+    public void Cnaps_selects_channel_by_amount_and_urgency(int amount, bool urgent, CnapsChannel expected)
         => Assert.Equal(expected, CnapsBuilder.SelectChannel(amount, urgent));
 
     // ===== RTGS 优先级队列 =====
