@@ -23,7 +23,28 @@ dotnet test TestFinance.sln --configuration Release
 dotnet run --project src/Payments.Api --urls http://localhost:5101
 ```
 
-每个服务提供 `/health`；示例请求与领域限制位于各服务目录的 `README.md`。
+每个服务提供 `/health`，并在开发环境提供 Swagger UI（`/swagger`）；示例请求与领域限制位于各服务目录的 `README.md`。
+
+## 构建脚本
+
+项目通过 NuGet 集中版本管理（`Directory.Packages.props`）。推荐使用 `dotnet-script` 构建：
+
+```bash
+dotnet tool restore
+dotnet script build.csx
+dotnet script build.csx Debug --skip-tests
+dotnet script build.csx Release --publish
+```
+
+也可在 PowerShell 7+ 下执行：
+
+```powershell
+./build.ps1
+./build.ps1 -Configuration Debug
+./build.ps1 -Publish
+```
+
+两个脚本都会严格按 `restore → build → test → (optional) publish` 执行。生产 CI 建议启用 NuGet 锁定文件并额外执行 `dotnet restore --locked-mode`，以保证依赖可复现。
 
 ## 工程与安全边界
 

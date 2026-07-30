@@ -1,8 +1,13 @@
 using Lending.Api;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSerilog();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<LendingService>();
 var app = builder.Build();
+if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 app.MapPost("/v1/loan-applications", (LoanApplication request, LendingService service) => { try { var loan = service.Submit(request); return Results.Created($"/v1/loans/{loan.Id}", loan); } catch (ArgumentException e) { return Results.BadRequest(new { error = e.Message }); } });
 app.MapGet("/v1/loans/{id:guid}", (Guid id, LendingService service) => Execute(() => service.Get(id)));

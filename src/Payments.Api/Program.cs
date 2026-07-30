@@ -1,8 +1,13 @@
 using Payments.Api;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSerilog();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<PaymentService>();
 var app = builder.Build();
+if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 app.MapPost("/v1/payments", (CreatePayment request, HttpRequest http, PaymentService service) =>
 {

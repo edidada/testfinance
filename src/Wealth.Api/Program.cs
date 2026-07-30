@@ -1,8 +1,13 @@
 using Wealth.Api;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSerilog();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<WealthService>();
 var app = builder.Build();
+if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 app.MapGet("/v1/products", (WealthService service) => Results.Ok(service.Products()));
 app.MapPost("/v1/accounts", (OpenAccountRequest body, WealthService service) => { try { var account = service.OpenAccount(body.CustomerId); return Results.Created($"/v1/accounts/{account.Id}", account); } catch (ArgumentException e) { return Results.BadRequest(new { error = e.Message }); } });
