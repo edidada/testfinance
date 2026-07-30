@@ -5,6 +5,8 @@
 > 📌 **文档结构**
 > - **本主文档**：供应商全景概览 + C/B 端功能交付形态对照表 + 性能/API 特色。
 > - **子文档**：代表性供应商的详细 API 出入参文档，位于 [`docs/vendors/`](./vendors/) 目录下，按 `领域/地域` 组织。
+>
+> 📂 **关联文档**：本文聚焦**第三方可对接 API 服务**（如 Stripe、支付宝）。若需了解**面向银行/金融机构的 B2B IT 解决方案商**（如宇信科技、长亮科技、神州信息等），请见 [china-fintech-vendors.md](./china-fintech-vendors.md)。
 
 ---
 
@@ -177,6 +179,7 @@
 | **华夏基金** | 公募、ETF、养老金 | 国内头部公募 | 机构 API；TA 系统对接 | — |
 | **天弘基金 (余额宝)** | 货币基金、互联网理财 | 余额宝全球最大货币基金 | 阿里生态 API；直销 API | — |
 | **蚂蚁财富 (支付宝)** | 基金代销、智能投顾 | C 端最大理财入口 | 支付宝 App；机构开放平台 | — |
+| **腾讯理财通** | 基金代销、智能投顾 | 微信九宫格入口，腾讯官方出品 | 开放平台 (OAuth2 + RSA2) | [📄 API 文档](./vendors/wealth/china/tencent-liquetong.md) |
 | **天天基金网 (东方财富)** | 基金代销、数据 | 国内最大独立基金销售 | 数据 API (行情/估值)；基金筛选 API | [📄 API 文档](./vendors/wealth/china/tiantian.md) |
 | **中国结算 (中证登)** | TA 过户、登记结算 | 国家级基础设施 | TA 接口（需报备）；DVP 结算接口 | — |
 | **恒生电子** | 金融 IT 解决方案 | 国内最大金融软件商 | 投资交易系统 API；TA/估值系统 | [📄 API 文档](./vendors/wealth/china/hundsun.md) |
@@ -188,6 +191,7 @@
 | :--- | :--- | :--- | :--- |
 | **天弘基金** | 余额宝（支付宝内）、天弘 App | 余额宝申购/赎回接口、收益查询、对账文件 | 阿里生态内嵌 + RESTful |
 | **蚂蚁财富** | 支付宝内基金频道、智能投顾、定投 | 基金产品查询、下单、撤单、持仓查询、对账 | 支付宝开放平台 (网关模式) |
+| **腾讯理财通** | 微信九宫格「理财通」、QQ 钱包、理财通 App | OAuth 授权、产品查询、申购/赎回、持仓查询、风险测评、Webhook | 微信 H5 + RESTful (OAuth2 + RSA2) |
 | **天天基金** | 天天基金 App、Web 交易页、定投计划 | 行情数据 API、估值数据 API、基金详情 API、（交易 API 仅面向合作机构） | App + RESTful |
 | **恒生电子** | （B2B 软件，无 C 端） | ARES 交易系统、TA 系统、估值系统、清算系统接口 | 私有协议 + Web Service |
 | **中证登** | （基础设施，无 C 端） | TA 过户接口、登记接口、结算接口、对账接口 | 专线 + 报文 (FIX/自定义) |
@@ -226,6 +230,10 @@
 - **全球理财**：Interactive Brokers / Fidelity / BlackRock iShares
 - **技术栈适配**：优先选择提供完善 .NET SDK 的供应商（如 Stripe, Adyen, Fidelity），降低集成成本。
 
+### 4.4 系统集成商选型
+
+若需求是**建设银行/金融机构内部 IT 系统**（核心系统、信贷系统、支付前置、TA 系统等），而非对接第三方 API，请见 [china-fintech-vendors.md](./china-fintech-vendors.md)。该文档覆盖宇信科技、长亮科技、神州信息、润和软件、沐融科技、东方通、高伟达等 B2B 解决方案商的能力矩阵、功能点与接口参考设计。
+
 ---
 
 ## 5. 详细 API 出入参文档索引
@@ -256,5 +264,20 @@
 | :--- | :--- | :--- | :--- |
 | 国际 | **Interactive Brokers** | [vendors/wealth/global/ibkr.md](./vendors/wealth/global/ibkr.md) | `POST /v1/api/orders` |
 | 国际 | **Fidelity** | [vendors/wealth/global/fidelity.md](./vendors/wealth/global/fidelity.md) | `POST /orders` |
+| 国内 | **腾讯理财通** | [vendors/wealth/china/tencent-liquetong.md](./vendors/wealth/china/tencent-liquetong.md) | `POST /v1/accounts/{id}/subscriptions` |
 | 国内 | **天天基金** | [vendors/wealth/china/tiantian.md](./vendors/wealth/china/tiantian.md) | 基金详情 API |
 | 国内 | **恒生电子** | [vendors/wealth/china/hundsun.md](./vendors/wealth/china/hundsun.md) | TA 申购接口 |
+
+### 5.4 金融 IT 解决方案商（⚠️ 私有部署参考设计）
+
+下列供应商为**面向银行/金融机构的 B2B 项目交付型**解决方案商，系统多为私有部署，接口规范以合同附件为准。详见 [china-fintech-vendors.md](./china-fintech-vendors.md)。
+
+| 供应商 | 主能力域 | 文档路径 | 代表性接口 |
+| :--- | :--- | :--- | :--- |
+| **宇信科技** | 信贷 + 支付前置 | [vendors/solutions/yuxin.md](./vendors/solutions/yuxin.md) | 信贷进件、支付清算 |
+| **长亮科技** | 银行核心 | [vendors/solutions/changliang.md](./vendors/solutions/changliang.md) | 存款开户、总账记账 |
+| **神州信息** | 核心 + 信贷 + 财富 | [vendors/solutions/dci.md](./vendors/solutions/dci.md) | 核心账务、信贷审批 |
+| **高伟达** | 核心 + 数字管理 | [vendors/solutions/gaoweida.md](./vendors/solutions/gaoweida.md) | 核心账务、监管报表 |
+| **润和软件** | 信贷 + 财富 | [vendors/solutions/runhe.md](./vendors/solutions/runhe.md) | 互联网信贷放款 |
+| **沐融科技** | 实时清算 | [vendors/solutions/murong.md](./vendors/solutions/murong.md) | RTGS 大额支付 |
+| **东方通** | 中间件 | [vendors/solutions/dongfangtong.md](./vendors/solutions/dongfangtong.md) | TongLINK/Q 消息收发 |
