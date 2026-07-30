@@ -12,6 +12,7 @@ public sealed class WealthServiceTests
         var account = service.OpenAccount("customer");
         Assert.Throws<InvalidOperationException>(() => service.Subscribe(account.Id, "CASH-CNY", 10m));
         service.VerifyKyc(account.Id, true);
+        service.AssessRisk(account.Id, 1);
         var order = service.Subscribe(account.Id, "CASH-CNY", 10m);
         Assert.Equal("subscribe", order.Type);
         Assert.Equal(10m, service.Valuation(account.Id));
@@ -23,6 +24,7 @@ public sealed class WealthServiceTests
         var service = new WealthService();
         var account = service.OpenAccount("customer");
         service.VerifyKyc(account.Id, true);
+        service.AssessRisk(account.Id, 5);
         Assert.Throws<InvalidOperationException>(() => service.Redeem(account.Id, "BOND-001", 1m));
     }
 }

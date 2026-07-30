@@ -11,6 +11,8 @@ public sealed class LendingServiceTests
         var service = new LendingService();
         var loan = service.Submit(new LoanApplication("customer", 20000m, 1000m, 12000m, 12, 850));
         Assert.Equal(LoanStatus.Approved, service.Decide(loan.Id).Status);
+        service.CreateContract(loan.Id, "contract-1");
+        service.SignContract(loan.Id);
         Assert.Equal(12, service.Disburse(loan.Id).Schedule.Count);
     }
 

@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payments.Api", "src\Payments.Api\Payments.Api.csproj", "{31C54AA5-4F65-4B8D-8E9D-04E43709C631}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.BuildingBlocks", "src\Finance.BuildingBlocks\Finance.BuildingBlocks.csproj", "{0DFD0419-D686-4D6B-95FA-544A101F1234}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lending.Api", "src\Lending.Api\Lending.Api.csproj", "{DF8CD22F-B9E4-490D-BA4B-EE9B7A6203D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wealth.Api", "src\Wealth.Api\Wealth.Api.csproj", "{4C70C2A2-72A3-491A-82E2-A4C270A6B325}"
@@ -23,6 +25,8 @@ Global
   GlobalSection(ProjectConfigurationPlatforms) = postSolution
     {31C54AA5-4F65-4B8D-8E9D-04E43709C631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
     {31C54AA5-4F65-4B8D-8E9D-04E43709C631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {0DFD0419-D686-4D6B-95FA-544A101F1234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {0DFD0419-D686-4D6B-95FA-544A101F1234}.Debug|Any CPU.Build.0 = Debug|Any CPU
     {DF8CD22F-B9E4-490D-BA4B-EE9B7A6203D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
     {DF8CD22F-B9E4-490D-BA4B-EE9B7A6203D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
     {4C70C2A2-72A3-491A-82E2-A4C270A6B325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -35,6 +39,8 @@ Global
     {1E2A8788-94BA-4B5C-A2D4-D3BCAFE96F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
     {31C54AA5-4F65-4B8D-8E9D-04E43709C631}.Release|Any CPU.ActiveCfg = Release|Any CPU
     {31C54AA5-4F65-4B8D-8E9D-04E43709C631}.Release|Any CPU.Build.0 = Release|Any CPU
+    {0DFD0419-D686-4D6B-95FA-544A101F1234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {0DFD0419-D686-4D6B-95FA-544A101F1234}.Release|Any CPU.Build.0 = Release|Any CPU
     {DF8CD22F-B9E4-490D-BA4B-EE9B7A6203D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
     {DF8CD22F-B9E4-490D-BA4B-EE9B7A6203D3}.Release|Any CPU.Build.0 = Release|Any CPU
     {4C70C2A2-72A3-491A-82E2-A4C270A6B325}.Release|Any CPU.ActiveCfg = Release|Any CPU
